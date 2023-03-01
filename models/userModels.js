@@ -25,6 +25,10 @@ const User = db.define('User', {
     type: DataTypes.DATE,
     allowNull: false,
     field: 'updateat'
+  },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false
   }
 }, {
   tableName: 'tb_user',

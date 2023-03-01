@@ -49,7 +49,7 @@ async function getAllUsers(req, res) {
   
   async function createUser(req, res) {
     try {
-      const { userid, username, password, createdAt, updatedAt } = req.body;
+      const { userid, username, password, createdAt, updatedAt, email } = req.body;
   
       // const existingUserPromise = User.findOne({ email }).exec();
       // const hashedPasswordPromise = bcrypt.hash(password, 10);
@@ -70,7 +70,7 @@ async function getAllUsers(req, res) {
         // password: hashedPassword,
         createdAt,
         updatedAt,
-        
+        email,
       });
   
       res.status(201).json({ user: newUser });
@@ -83,7 +83,7 @@ async function getAllUsers(req, res) {
   async function updateUser(req, res) {
     try {
       const { id } = req.params;
-      const update = { username, password, createdAt, updatedAt } = req.body;
+      const update = { username, password, createdAt, updatedAt, email } = req.body;
   
       const user = await User.findByPk(id);
 
