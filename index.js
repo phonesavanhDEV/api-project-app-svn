@@ -5,12 +5,14 @@ const userRoutes = require('./routes/userRoutes');
 
 // Middleware
 app.use(express.json());
+app.use(express.static(__dirname));
 
-app.get('/', (req, res) => {
-  res.send('welcome my demo prject');
+app.use('/login', (req, res) => {
+  res.sendFile(__dirname + '/views/login.html');
 });
 
 // Routes
+
 app.use('/users', userRoutes);
 
 

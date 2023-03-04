@@ -1,5 +1,7 @@
 
 const User = require('../models/userModels');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 //const axios = require('axios');
 
 // async function getAllUsers(req, res) {
@@ -119,12 +121,83 @@ async function getAllUsers(req, res) {
       res.status(500).send('Server Error');
     }
   }
+
+  async function loginUser(req, res) {
+    const { email, password } = req.body;
+    //const user = await User.findOne({ email, password });
+    try {
+      const user = await User.findOne({ where: { email, password } });
+
+      if (!user) {
+        return res.status(401).send('Invalid username or password');
+      }
+      else{
+        res.redirect('/views/home.html');
+      }
+      //token
+      // const match = await bcrypt.compare(password, user.password);
+
+      // if (!match) {
+      //   return res.status(401).send('Invalid username or password match');
+      // }
+      // const token = jwt.sign({ id: user.email }, config.jwt.secret, {
+      //   expiresIn: config.jwt.expiresIn,
+      // });
+    
+      // req.session.token = token;
+      // res.json({ token });
+
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Server error loginUser');
+    }
+  }
+
+  async function logout(req, res) {
+    try {
+    req.session = null;
+    res.json({ message: 'Logged out successfully' });
+    } catch (error) {
+    console.error(error);
+    res.status(500).send('Server error');
+    }
+  }
+
+  async function register(req, res) {
+    const { email, password } = req.body;
+    try {
+      const existingUser = await User.findOne({ where: { email } });
+    
+      if (existingUser) {
+        return res.status(400).send('Username already taken');
+      }
+    
+      const hashedPassword = await bcrypt.hash(password, saltRounds);
+    
+      const user = await User.create({ username, password: hashedPassword });
+    
+      const token = jwt.sign({ id: user.id }, config.jwt.secret, {
+        expiresIn: config.jwt.expiresIn,
+      });
+    
+      req.session.token = token;
+      res.json({ token });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Server error');
+    }
+  }
+
   module.exports = {
     getAllUsers,
     getUserById,
     createUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    loginUser,
+    logout,
+    register,
+
   };
 
 
