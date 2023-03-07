@@ -150,9 +150,10 @@ async function getAllUsers(req, res) {
     } catch (err) {
       console.error(err);
       res.status(500).json({ error: 'Server error' });
+      //error 500
     }
   }
-  
+
   async function logout(req, res) {
     try {
     req.session = null;
