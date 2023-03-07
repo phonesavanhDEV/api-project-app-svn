@@ -94,33 +94,65 @@ async function getAllUsers(req, res) {
     }
   }
 
-  async function loginUser(req, res) {
-    const { email, password } = req.body;
+  // async function loginUser(req, res) {
+  //   const { email, password } = req.body;
 
+  //   try {
+  //     // Check if user with email exists in database
+  //     const user = await User.findOne({ where: { email } });
+  //     if (!user) {
+  //       return res.status(401).json({ error: 'Invalid email or password user' });
+  //     }
+  
+  //     // Compare password with hashed password in database
+  //     const isMatch = await bcrypt.compare(password, user.password);
+  //     if (!isMatch) {
+  //       return res.status(401).json({ error: 'Invalid email or password bcrypt' });
+  //     }
+  
+  //     // Generate JWT token and send it back in response
+  //     const token = jwt.sign({ id: user.userid }, process.env.SECRET_KEY);
+  //     res.cookie('token', token, { httpOnly: true });
+  //     res.json({ message: 'Logged in successfully', token });
+
+  //   } catch (err) {
+  //     console.error(err);
+  //     res.status(500).json({ error: 'Server error' });
+  //   }
+  // }
+  async function loginUser(req, res) {
     try {
+      const { email, password } = req.body;
+  
+      if (!email || !password) {
+        return res.status(400).json({ error: 'Email and password are required' });
+      }
+  
       // Check if user with email exists in database
       const user = await User.findOne({ where: { email } });
+  
       if (!user) {
         return res.status(401).json({ error: 'Invalid email or password user' });
       }
   
       // Compare password with hashed password in database
       const isMatch = await bcrypt.compare(password, user.password);
+  
       if (!isMatch) {
         return res.status(401).json({ error: 'Invalid email or password bcrypt' });
       }
   
       // Generate JWT token and send it back in response
       const token = jwt.sign({ id: user.userid }, process.env.SECRET_KEY);
+  
       res.cookie('token', token, { httpOnly: true });
       res.json({ message: 'Logged in successfully', token });
-
     } catch (err) {
       console.error(err);
       res.status(500).json({ error: 'Server error' });
     }
   }
-
+  
   async function logout(req, res) {
     try {
     req.session = null;
