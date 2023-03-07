@@ -15,17 +15,11 @@ loginForm.addEventListener('submit', async (event) => {
     body: JSON.stringify({ email, password }),
   });
 
+	
+	const data = await response.json();
 	if (response.status === 401) {
-		alert('Invalid username or password');
+	  alert(data.error);
 	} else if (response.status === 200) {
-		window.location.href = '/views/home.html';
+	  window.location.href = '/views/home.html';
 	}
-	// if (response.ok) {
-	// 	const { token } = await response.json();
-	// 	document.cookie = `token=${token}`;
-	// 	window.location.href = '/views/home.html';
-	// } else {
-	// 	const error = await response.text();
-	// 	alert(error);
-	// }
 });

@@ -16,11 +16,11 @@ const sequelize = new Sequelize({
   },
   session: {
     name: 'session',
-    secret: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsInVzZXJuYW1lIjoicGhvbmVzYXZhbmgiLCJwYXNzd29yZCI6IjEyMzQ1NiIsImNyZWF0ZWRBdCI6IjIwMjMtMDItMjUiLCJ1cGRhdGVkQXQiOiIyMDIzLTAzLTAxIiwiZW1haWwiOiJwaG9uZXNvbXBob25nQGdtYWlsLmNvbSJ9.2HxQQxiXK7G2OyzCHkKwLOdxq7YK9Y2Thy-9UqB3lRk',
+    secret: process.env.SECRET_KEY,
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
   },
   jwt: {
-    secret: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsInVzZXJuYW1lIjoicGhvbmVzYXZhbmgiLCJwYXNzd29yZCI6IjEyMzQ1NiIsImNyZWF0ZWRBdCI6IjIwMjMtMDItMjUiLCJ1cGRhdGVkQXQiOiIyMDIzLTAzLTAxIiwiZW1haWwiOiJwaG9uZXNvbXBob25nQGdtYWlsLmNvbSJ9.2HxQQxiXK7G2OyzCHkKwLOdxq7YK9Y2Thy-9UqB3lRk',
+    secret: process.env.SECRET_KEY,
     expiresIn: '1h',
   },
 });
