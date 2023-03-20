@@ -21,7 +21,7 @@ const sequelize = new Sequelize({
   },
   jwt: {
     secret: process.env.SECRET_KEY,
-    expiresIn: '1h',
+    // expiresIn: '1h',
   },
 });
 

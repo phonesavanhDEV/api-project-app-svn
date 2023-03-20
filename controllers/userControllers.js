@@ -2,8 +2,8 @@
 const User = require('../models/userModels');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
-
+require('dotenv').config();
+const secret = process.env.SECRET_KEY;
 
 async function getAllUsers(req, res) {
     try {
@@ -143,14 +143,13 @@ async function getAllUsers(req, res) {
       }
   
       // Generate JWT token and send it back in response
-      const token = jwt.sign({ id: user.userid }, process.env.SECRET_KEY);
+      const token = jwt.sign({ email }, secret);
   
       res.cookie('token', token, { httpOnly: true });
       res.json({ message: 'Logged in successfully', token });
     } catch (err) {
       console.error(err);
       res.status(500).json({ error: 'Server error' });
-      //error 500
     }
   }
 
@@ -163,8 +162,6 @@ async function getAllUsers(req, res) {
     res.status(500).send('Server error');
     }
   }
-
- 
 
   async function register(req, res) {
     const { userid, username, password, createdAt, updatedAt, email } = req.body;
@@ -205,7 +202,6 @@ async function getAllUsers(req, res) {
     loginUser,
     logout,
     register,
-
   };
 
 
