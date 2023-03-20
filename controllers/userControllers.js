@@ -180,7 +180,7 @@ async function getAllUsers(req, res) {
         email,
       });
  
-      const token = jwt.sign({ id: user.userid }, process.env.SECRET_KEY);
+      const token = jwt.sign({ email }, secret);
       req.session.token = token;
       
       res.status(200).json({

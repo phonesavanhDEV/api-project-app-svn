@@ -79,7 +79,7 @@ if (response.ok) {
   } else {
     const data = await response.json();
     alert(data.message);
-    window.location.href = '/views/home.html';
+    // window.location.href = '/views/home.html';
   }
 
 });
