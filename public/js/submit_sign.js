@@ -75,7 +75,8 @@ const response = await fetch('/users/register', {
 });
 
 if (response.ok) {
-    window.location.href = '/views/home.html';
+    
+    window.location.href = '/home';
   } else {
     const data = await response.json();
     alert(data.message);

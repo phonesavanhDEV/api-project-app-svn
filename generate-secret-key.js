@@ -1,18 +1,18 @@
-// // ramdom key api
-// const crypto = require('crypto');
-// const secretKey = crypto.randomBytes(64).toString('hex');
-// console.log(secretKey);
+// ramdom key api
+const crypto = require('crypto');
+const secretKey = crypto.randomBytes(64).toString('hex');
+console.log(secretKey);
 
 
 //genarate sha-256
-const crypto = require('crypto');
+// const crypto = require('crypto');
 
-const url = 'http://165.22.51.189:3000';
-const hash = crypto.createHash('sha256');
-hash.update(url);
-const hashKey = hash.digest('hex');
+// const url = 'http://165.22.51.189:3000';
+// const hash = crypto.createHash('sha256');
+// hash.update(url);
+// const hashKey = hash.digest('hex');
 
-console.log(hashKey);
+// console.log(hashKey);
 
 
 // //test
@@ -40,4 +40,22 @@ console.log(hashKey);
 
 //   // Login successful
 //   return res.send('Login successful');
+// });
+
+// const express = require('express');
+// const crypto = require('crypto');
+
+// const app = express();
+
+// app.get('/users', (req, res) => {
+//   const url = 'http://165.22.51.189:3000';
+//   const hash = crypto.createHash('sha256');
+//   hash.update(url);
+//   const hashKey = hash.digest('hex');
+  
+//   res.send(`Hashed URL Key: ${hashKey}`);
+// });
+
+// app.listen(3000, () => {
+//   console.log('Server listening on port 3000!');
 // });

@@ -53,7 +53,8 @@ loginForm.addEventListener('submit', async (event) => {
     if (response.status === 401) {
       alert(data.error);
     } else if (response.status === 200) {
-      window.location.href = '/views/home.html';
+      window.location.href = '/home';
+     
     }
   } catch (error) {
     console.error(error);
