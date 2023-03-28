@@ -21,22 +21,10 @@ app.use(cookieSession({
 app.use(cors());
 
 
-// app.use('/login', (req, res) => {
-//   res.sendFile(__dirname + '/views/login.html');
-// });
-
-// app.use('/register', (req, res) => {
-//   res.sendFile(__dirname + '/views/signup.html');
-// })
-
-
 // Routes
-
 app.use('/users', userRoutes);
 app.use(middleware);
-// app.use('/home', middleware);
-// app.use('/login', middleware);
-// app.use('/register', middleware);
+
 
 // Error handling middleware
 app.use((err, req, res, next) => {

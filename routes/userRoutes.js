@@ -3,9 +3,6 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userControllers');
   
-
-
-
 // Routes
 router.get('/', userController.getAllUsers);
 router.get('/:id', userController.getUserById);
